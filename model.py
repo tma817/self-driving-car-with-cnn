@@ -14,6 +14,7 @@ from tensorflow.keras.callbacks import EarlyStopping
 df = pd.read_csv('data/driving_log.csv')
 df.columns = ['center', 'left', 'right', 'steering', 'throttle', 'brake', 'speed']
 
+# Set max samples per bin
 max_samples = 400
 samples_per_bin, bins = np.histogram(df['steering'], bins=25)
 
@@ -43,7 +44,7 @@ print(f'Remaining samples: {len(df)}')
 # --- Preprocessing ---
 def preProcessing(img):
     img = img[60:135, :, :]
-    img = cv.cvtColor(img, cv.COLOR_RGB2YUV)
+    img = cv.cvtColor(img, cv.COLOR_BGR2YUV)
     img = cv.GaussianBlur(img, (3, 3), 0)
     img = cv.resize(img, (200, 66))
     img = img / 255
