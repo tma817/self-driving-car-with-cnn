@@ -129,7 +129,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 print('Training samples:', len(X_train))
 print('Test samples:', len(X_test))
 
-# Visualize sample images
+# --- Visualize sample images ---
 fig, axes = plt.subplots(3, 3, figsize=(12, 8))
 for ax in axes.flat:
     idx = random.randint(0, len(X)-1)
