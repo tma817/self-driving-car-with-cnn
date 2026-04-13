@@ -57,13 +57,13 @@ def augmentFlip(img, steering):
     return img, steering
 
 def augmentBrightness(img):
-    img = cv.cvtColor(img, cv.COLOR_RGB2HSV)
+    img = cv.cvtColor(img, cv.COLOR_BGR2HSV)
     img = np.array(img, dtype=float)
     factor = random.uniform(0.2, 1.2)
     img[:,:,2] = img[:,:,2] * factor
     img[:,:,2][img[:,:,2] > 255] = 255
     img = np.array(img, dtype=np.uint8)
-    img = cv.cvtColor(img, cv.COLOR_HSV2RGB)
+    img = cv.cvtColor(img, cv.COLOR_HSV2BGR)
     return img
 
 def augmentZoom(img):
