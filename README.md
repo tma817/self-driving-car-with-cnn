@@ -201,3 +201,6 @@ python TestSimulation.py
 
 ## Conclusion
 This project shows how a CNN can be used for end-to-end steering prediction in a self-driving car simulation. By combining deep learning for perception with simple rule-based control, the system is able to achieve stable and effective driving behavior.
+
+## Video demonstration
+https://youtu.be/SeGHe6kXgaE

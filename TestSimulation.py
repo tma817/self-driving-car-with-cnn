@@ -35,17 +35,17 @@ def telemetry(sid, data):
     image = np.array([image])
 
     steering = float(model.predict(image))
-    steering = steering * 1.1  
-    steering = 0.7 * prev_steering + 0.3 * steering
-    steering = max(min(steering, 1), -1)
+    steering = steering * 1.05  
+    steering = 0.7 * prev_steering + 0.25 * steering
+    steering = max(min(steering, 0.7), -0.7)
     prev_steering = steering
 
-    if abs(steering) > 0.2:
-        maxSpeed = 2
-    elif abs(steering) > 0.1:
-        maxSpeed = 3
-    elif abs(steering) > 0.05:
-        maxSpeed = 4
+    if abs(steering) > 0.3:
+        maxSpeed = 1.8
+    elif abs(steering) > 0.18:
+        maxSpeed = 2.5
+    elif abs(steering) > 0.08:
+        maxSpeed = 3.5
     else:
         maxSpeed = 4.5
 
