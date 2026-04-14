@@ -35,7 +35,10 @@ def telemetry(sid, data):
     image = preProcessing(image)
     image = np.array([image])
 
+    # Raw steering angle value from the model
     steering = float(model.predict(image, verbose=0))
+
+    # --- Modification to steering angle ---
     steering = steering * 1.05
     steering = 0.75 * prev_steering + 0.25 * steering
     steering = max(min(steering, 0.7), -0.7)
@@ -50,6 +53,7 @@ def telemetry(sid, data):
     else:
         maxSpeed = 4.5
 
+    # --- Modify throttle based on current speed
     throttle = 1.0 - speed / maxSpeed
     if speed > maxSpeed:
         throttle = -0.3

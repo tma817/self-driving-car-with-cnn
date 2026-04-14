@@ -6,7 +6,7 @@ import cv2 as cv
 import random 
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, Flatten, Dense, Dropout
+from tensorflow.keras.layers import Conv2D, Flatten, Dense
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import EarlyStopping
 
@@ -15,7 +15,7 @@ df = pd.read_csv('data/driving_log.csv')
 df.columns = ['center', 'left', 'right', 'steering', 'throttle', 'brake', 'speed']
 
 # Set max samples per bin
-max_samples = 300
+max_samples = 250
 samples_per_bin, bins = np.histogram(df['steering'], bins=25)
 
 # Remove excess samples from overrepresented bins
@@ -151,10 +151,10 @@ early_stop = EarlyStopping(monitor='val_loss',
 
 history = model.fit(
     batchGenerator(X_train, y_train, 32, training=True),
-    steps_per_epoch=150,   
+    steps_per_epoch=len(X_train) // 32,
+    validation_steps=len(X_test) // 32,
     epochs=50,
     validation_data=batchGenerator(X_test, y_test, 32, training=False),
-    validation_steps=100, 
     callbacks=[early_stop]
 )
 
